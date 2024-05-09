@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Todo;
+use App\Http\Requests\TodoStoreRequest;
 
 class TodoController extends Controller
 {
@@ -11,33 +12,62 @@ class TodoController extends Controller
     {
         $todos = Todo::all();
 
-        return response()->json($todos);
+        return response()->json([
+            'results' => $todos
+        ], 200);
     }
 
-    public function create(Request $request)
+    public function store(TodoStoreRequest $request)
     {
-        $todo = Todo::create([
-            'description' => $request->description,
-            'completed' => false,
-        ]);
+        try {
+            Todo::create([
+                'description' => $request->description,
+                'completed' => false,
+            ]);
 
-        return response()->json($todo);
+            return response()->json([
+                'message' => "Task succesfully added!"
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Something went really wrong!'
+            ], 500);
+        }
     }
 
-    public function update(Request $request, $id)
+    public function update($id)
     {
-        $todo = Todo::find($id);
+        try {
+            $todo = Todo::find($id);
 
-        $todo->completed = $request->has('completed') ? $request->completed : $todo->completed;
-        $todo->save();
+            if (!$todo) {
+                return $todo()->json([
+                    'message' => 'Task Not Found.'
+                ], 404);
+            }
 
-        return response()->json($todo);
+            $todo->completed = !$todo->completed;
+
+            $todo->save();
+
+            return response()->json([
+                'message' => "Task succesfully updated!"
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Something went really wrong!'
+            ], 500);
+        }
     }
 
-    public function delete()
+    public function destroy()
     {
-        $todo = Todo::where('completed', true)->delete();
+        $todo = Todo::where('completed', true)->get();
 
-        return response()->json($todo);
+        $todo->each->delete();
+
+        return response()->json([
+            'message' => 'Tasks succesfully deleted.'
+        ], 200);
     }
 }
