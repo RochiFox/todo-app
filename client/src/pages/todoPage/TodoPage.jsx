@@ -142,38 +142,6 @@ export default function TodoPage() {
               <span className="count">{remainingTasks}</span> items left
             </p>
 
-            <div className="total-lists__filter-block">
-              <button
-                className={`total-lists__btn ${
-                  isDarkTheme
-                    ? "total-lists__btn_dark"
-                    : "total-lists__btn_light"
-                }`}
-              >
-                All
-              </button>
-
-              <button
-                className={`total-lists__btn ${
-                  isDarkTheme
-                    ? "total-lists__btn_dark"
-                    : "total-lists__btn_light"
-                }`}
-              >
-                Active
-              </button>
-
-              <button
-                className={`total-lists__btn ${
-                  isDarkTheme
-                    ? "total-lists__btn_dark"
-                    : "total-lists__btn_light"
-                }`}
-              >
-                Completed
-              </button>
-            </div>
-
             <button
               className={`total-lists__btn ${
                 isDarkTheme ? "total-lists__btn_dark" : "total-lists__btn_light"

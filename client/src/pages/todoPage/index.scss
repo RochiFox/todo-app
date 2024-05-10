@@ -36,6 +36,7 @@
   &__block {
     width: 700px;
     margin: 100px auto 0;
+    padding-bottom: 50px;
     position: relative;
     z-index: 2;
   }
@@ -191,12 +192,6 @@
     &_dark {
       color: $text-color-dark;
     }
-  }
-
-  &__filter-block {
-    display: flex;
-    justify-content: space-between;
-    width: 200px;
   }
 
   &__btn {
