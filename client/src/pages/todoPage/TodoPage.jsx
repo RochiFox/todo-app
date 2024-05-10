@@ -42,6 +42,7 @@ export default function TodoPage() {
 
       console.log("Task added: ", response.data);
       setTask("");
+      // updateRemainingTasks(todoData.concat(response.data));
     } catch (error) {
       console.error("Some error: ", error);
     }
@@ -61,6 +62,9 @@ export default function TodoPage() {
   const handleDelete = async () => {
     await axios.delete("http://127.0.0.1:8000/api/todosdelete");
   };
+
+  // Count remaining tasks
+  const remainingTasks = todoData.filter((todo) => todo.completed === 0).length;
 
   return (
     <div className={`main ${isDarkTheme ? "main_dark" : "main_light"}`}>
@@ -135,7 +139,7 @@ export default function TodoPage() {
                   : "total-lists__count-light"
               }`}
             >
-              <span className="count">3</span> items left
+              <span className="count">{remainingTasks}</span> items left
             </p>
 
             <div className="total-lists__filter-block">

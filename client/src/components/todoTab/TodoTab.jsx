@@ -44,7 +44,7 @@ export default function TodoTab({ id, description, completed }) {
       <p
         className={`todo-tab__text ${
           isDarkTheme ? "todo-tab__text_dark" : "todo-tab__text_light"
-        }`}
+        } ${isChecked ? "todo-tab__text_checked" : ""}`}
       >
         {description}
       </p>

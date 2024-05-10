@@ -70,7 +70,12 @@
       overflow: hidden;
       text-overflow: ellipsis;
       font-size: 20px;
-      transition: color 0.3s ease-in-out;
+      transition: color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+
+      &_checked {
+        text-decoration: line-through;
+        opacity: 0.5;
+      }
   
       &_light {
         color: $text-color-light;
