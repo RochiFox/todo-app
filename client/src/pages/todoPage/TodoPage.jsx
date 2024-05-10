@@ -1,30 +1,47 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTheme } from "../../redux/reducers/themeSlice";
 import axios from "axios";
 import "./index.scss";
 import TodoTab from "../../components/todoTab/TodoTab";
 
-
 export default function TodoPage() {
   const isDarkTheme = useSelector((state) => state.theme.isDarkTheme);
   const dispatch = useDispatch();
   const [task, setTask] = useState("");
+  const [todoData, setTodoData] = useState([]);
 
+  // Change Light/Dark theme
   const handleThemeToggle = () => {
     dispatch(toggleTheme());
   };
 
+  // Show all data
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const result = await axios("http://127.0.0.1:8000/api/todos");
+
+      setTodoData(result.data.results);
+    } catch (error) {
+      console.log("Something wrong: ", error);
+    }
+  };
+
+  // Add new data
   const handleTaskSubmit = async (event) => {
     event.preventDefault();
-  
+
     try {
-      const response = await axios.post("http://127.0.0.1:8000/api/todos", {
+      const response = await axios.post("http://127.0.0.1:8000/api/addnew", {
         description: task,
       });
-  
+
       console.log("Task added: ", response.data);
-      setTask(""); 
+      setTask("");
     } catch (error) {
       console.error("Some error: ", error);
     }
@@ -38,6 +55,11 @@ export default function TodoPage() {
     if (event.key === "Enter") {
       handleTaskSubmit(event);
     }
+  };
+
+  // Delete checked tasks
+  const handleDelete = async () => {
+    await axios.delete("http://127.0.0.1:8000/api/todosdelete");
   };
 
   return (
@@ -90,11 +112,16 @@ export default function TodoPage() {
         </div>
 
         <div className="tabs-block">
-          <TodoTab />
-          <TodoTab />
-          <TodoTab />
-          <TodoTab />
-          <TodoTab />
+          {todoData.map((todo) => {
+            return (
+              <TodoTab
+                key={todo.id}
+                id={todo.id}
+                description={todo.description}
+                completed={todo.completed}
+              />
+            );
+          })}
 
           <div
             className={`total-lists ${
@@ -147,6 +174,7 @@ export default function TodoPage() {
               className={`total-lists__btn ${
                 isDarkTheme ? "total-lists__btn_dark" : "total-lists__btn_light"
               }`}
+              onClick={handleDelete}
             >
               Clear Completed
             </button>
