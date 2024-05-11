@@ -18,10 +18,7 @@ export default function TodoTab({ id, description, completed }) {
     setIsChecked(!isChecked);
 
     try {
-      const response = await axios.put(
-        `http://127.0.0.1:8000/api/todosupdate/${id}`
-      );
-      console.log("Task checked: ", response.data);
+      await axios.put(`http://127.0.0.1:8000/api/todosupdate/${id}`);
     } catch (error) {
       console.log("Some error: ", error);
     }

@@ -36,13 +36,12 @@ export default function TodoPage() {
     event.preventDefault();
 
     try {
-      const response = await axios.post("http://127.0.0.1:8000/api/addnew", {
+      await axios.post("http://127.0.0.1:8000/api/addnew", {
         description: task,
       });
 
-      console.log("Task added: ", response.data);
       setTask("");
-      // updateRemainingTasks(todoData.concat(response.data));
+      fetchData();
     } catch (error) {
       console.error("Some error: ", error);
     }
@@ -61,6 +60,7 @@ export default function TodoPage() {
   // Delete checked tasks
   const handleDelete = async () => {
     await axios.delete("http://127.0.0.1:8000/api/todosdelete");
+    fetchData();
   };
 
   // Count remaining tasks
