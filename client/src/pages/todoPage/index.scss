@@ -41,7 +41,6 @@
     z-index: 2;
   }
 
-  // First Section
   &__section {
     display: flex;
     align-items: center;
@@ -77,21 +76,6 @@
 
     &_dark {
       background-image: url("../../assets/images/icon-sun.svg");
-    }
-  }
-
-  &__subtitle {
-    margin-top: 50px;
-    font-size: 18px;
-    text-align: center;
-    transition: color 0.3s ease-in-out;
-
-    &_light {
-      color: $text-color-light;
-    }
-
-    &_dark {
-      color: $text-color-dark;
     }
   }
 }

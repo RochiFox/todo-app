@@ -153,14 +153,6 @@ export default function TodoPage() {
             </button>
           </div>
         </div>
-
-        <p
-          className={`main__subtitle ${
-            isDarkTheme ? "main__subtitle_dark" : "main__subtitle_light"
-          }`}
-        >
-          Drag and drop to reorder list
-        </p>
       </div>
     </div>
   );
