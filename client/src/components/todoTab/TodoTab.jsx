@@ -8,9 +8,10 @@ TodoTab.propTypes = {
   id: PropTypes.number.isRequired,
   description: PropTypes.string,
   completed: PropTypes.number,
+  updateData: PropTypes.func
 };
 
-export default function TodoTab({ id, description, completed }) {
+export default function TodoTab({ id, description, completed, updateData  }) {
   const isDarkTheme = useSelector((state) => state.theme.isDarkTheme);
   const [isChecked, setIsChecked] = useState(completed === 1);
 
@@ -19,6 +20,7 @@ export default function TodoTab({ id, description, completed }) {
 
     try {
       await axios.put(`http://127.0.0.1:8000/api/todosupdate/${id}`);
+      updateData();
     } catch (error) {
       console.log("Some error: ", error);
     }

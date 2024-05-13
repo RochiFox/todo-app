@@ -123,6 +123,7 @@ export default function TodoPage() {
                 id={todo.id}
                 description={todo.description}
                 completed={todo.completed}
+                updateData={fetchData}
               />
             );
           })}
