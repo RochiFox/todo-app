@@ -1,5 +1,6 @@
 @import "./../../assets/colors/colors.scss";
 @import url("./../../assets/fonts/fonts.scss");
+@import "./../../assets/variables/variables.scss";
 
 .main {
   min-height: 900px;
@@ -24,12 +25,24 @@
     background-size: cover;
     transition: background 0.3s ease-in-out;
 
+    @media (max-width: $tablet-size) {
+      height: 300px;
+    }
+
     &_light {
       background-image: url("../../assets/images/bg-desktop-light.jpg");
+
+      @media (max-width: $mobile-size) {
+        background-image: url("../../assets/images/bg-mobile-light.jpg");
+      }
     }
 
     &_dark {
       background-image: url("../../assets/images/bg-desktop-dark.jpg");
+
+      @media (max-width: $mobile-size) {
+        background-image: url("../../assets/images/bg-mobile-dark.jpg");
+      }
     }
   }
 
@@ -39,8 +52,21 @@
     padding-bottom: 50px;
     position: relative;
     z-index: 2;
+
+    @media (max-width: $desktop-size) {
+      width: 75%;
+    }
+
+    @media (max-width: $tablet-size) {
+      width: 80%;
+    }
+
+    @media (max-width: $mobile-size) {
+      width: 90%;
+    }
   }
 
+  // First Section
   &__section {
     display: flex;
     align-items: center;
@@ -56,6 +82,11 @@
     font-size: 36px;
     letter-spacing: 0.8rem;
     color: $columns-background-light;
+
+    @media (max-width: $tablet-size) {
+      font-size: 28px;
+      letter-spacing: 0.6rem;
+    }
   }
 
   &__theme-btn {
@@ -78,6 +109,21 @@
       background-image: url("../../assets/images/icon-sun.svg");
     }
   }
+
+  // &__subtitle {
+  //   margin-top: 50px;
+  //   font-size: 18px;
+  //   text-align: center;
+  //   transition: color 0.3s ease-in-out;
+
+  //   &_light {
+  //     color: $text-color-light;
+  //   }
+
+  //   &_dark {
+  //     color: $text-color-dark;
+  //   }
+  // }
 }
 
 .input-block {
@@ -91,6 +137,10 @@
   border-radius: 10px;
   box-sizing: border-box;
   transition: background 0.3s ease-in-out;
+
+  @media (max-width: $tablet-size) {
+    margin-top: 30px;
+  }
 
   &_light {
     background-color: $columns-background-light;
@@ -126,6 +176,10 @@
     outline: none;
     font-family: "JosefinSans", serif;
     transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+
+    @media (max-width: $tablet-size) {
+      font-size: 18px;
+    }
 
     &_light {
       background-color: $columns-background-light;
